@@ -16,7 +16,7 @@ import os
 from langchain_teddynote.document_loaders import HWPLoader
 
 # API KEY 정보로드
-load_dotenv()
+#load_dotenv()
 
 # 캐시 디렉토리 생성
 if not os.path.exists(".cache"):
@@ -114,7 +114,7 @@ def create_chain(retriever, prompt_path="prompts/pdf-rag.yaml", model_name="gpt-
 
     # 단계 7: 언어모델(LLM) 생성
     # 모델(LLM) 을 생성합니다.
-    llm = ChatOpenAI(model_name=model_name, temperature=0)
+    llm = ChatOpenAI(model_name="gpt-4o", temperature=0, api_key=st.session_state.api_key)
 
     # 단계 8: 체인(Chain) 생성
     chain = (
