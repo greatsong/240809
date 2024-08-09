@@ -29,7 +29,7 @@ if not os.path.exists(".cache/files"):
 if not os.path.exists(".cache/embeddings"):
     os.mkdir(".cache/embeddings")
 
-st.title("HWP 기반 QA💬")
+st.title("HWP 기반 석리송봇💬")
 
 # 처음 1번만 실행하기 위한 코드
 if "messages" not in st.session_state:
