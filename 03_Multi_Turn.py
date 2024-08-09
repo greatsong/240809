@@ -87,7 +87,7 @@ def create_chain(model_name="gpt-4o"):
     )
 
     # llm 생성
-    llm = ChatOpenAI(model_name="gpt-4o")
+    llm = ChatOpenAI(model_name="gpt-4o", api_key=st.session_state.api_key)
 
     # 일반 Chain 생성
     chain = prompt | llm | StrOutputParser()
