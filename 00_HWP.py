@@ -37,10 +37,10 @@ if "messages" not in st.session_state:
 
 if "HWP_chain" not in st.session_state:
     # 아무런 파일을 업로드 하지 않을 경우
-    st.session_state["HWP_chain"] = None
+    st.session_state["hwp_chain"] = None
 
 if "HWP_retriever" not in st.session_state:
-    st.session_state["HWP_retriever"] = None
+    st.session_state["hwp_retriever"] = None
 
 # 사이드바 생성
 with st.sidebar:
