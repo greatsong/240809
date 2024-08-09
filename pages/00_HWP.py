@@ -16,7 +16,7 @@ import os
 from langchain_teddynote.document_loaders import HWPLoader
 
 # API KEY 정보로드
-load_dotenv()
+#load_dotenv()
 
 # 캐시 디렉토리 생성
 if not os.path.exists(".cache"):
@@ -29,7 +29,7 @@ if not os.path.exists(".cache/files"):
 if not os.path.exists(".cache/embeddings"):
     os.mkdir(".cache/embeddings")
 
-st.title("HWP 기반 QA💬")
+st.title("HWP 기반 석리송봇💬")
 
 # 처음 1번만 실행하기 위한 코드
 if "messages" not in st.session_state:
@@ -46,10 +46,10 @@ if "pdf_retriever" not in st.session_state:
 # 사이드바 생성
 with st.sidebar:
     # 초기화 버튼 생성
-    clear_btn = st.button("대화 초기화")
+    clear_btn = st.button("초기화")
 
     # 파일 업로드
-    uploaded_file = st.file_uploader("파일 업로드", type=["hwp","hwpx"])
+    uploaded_file = st.file_uploader("파일업로드", type=["hwp","hwpx"])
 
     # 모델 선택 메뉴
     selected_model = st.selectbox(
@@ -94,7 +94,7 @@ def embed_file(file):
     split_documents = text_splitter.split_documents(docs)
 
     # 단계 3: 임베딩(Embedding) 생성
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key = api_key)
 
     # 단계 4: DB 생성(Create DB) 및 저장
     # 벡터스토어를 생성합니다.
@@ -157,7 +157,14 @@ if update_btn:
 
 # 이전 대화 기록 출력
 print_messages()
+api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
+save_btn = st.button("설정 저장", key="save_btn")
 
+if save_btn:
+    settings.save_config({"api_key": api_key})
+    st.session_state.api_key = api_key
+    st.write("설정이 저장되었습니다.")
+    
 # 사용자의 입력
 user_input = st.chat_input("궁금한 내용을 물어보세요!")
 
