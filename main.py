@@ -63,7 +63,8 @@ def create_chain(prompt_filepath, task=""):
         prompt = prompt.partial(task=task)
 
     # GPT
-    llm = ChatOpenAI(model_name="gpt-4o", temperature=0)
+    #llm = ChatOpenAI(model_name="gpt-4o", temperature=0)
+    llm = ChatOpenAI(model_name="gpt-4o", temperature=0, api_key=st.session_state.api_key)
 
     # 출력 파서
     output_parser = StrOutputParser()
