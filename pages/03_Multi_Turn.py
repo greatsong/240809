@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 import os
 
 # API KEY 정보로드
-load_dotenv()
+#load_dotenv()
 
 # 캐시 디렉토리 생성
 if not os.path.exists(".cache"):
@@ -87,7 +87,7 @@ def create_chain(model_name="gpt-4o"):
     )
 
     # llm 생성
-    llm = ChatOpenAI(model_name="gpt-4o")
+    llm = ChatOpenAI(model_name="gpt-4o", openai_api_key = st.session_state.api_key)
 
     # 일반 Chain 생성
     chain = prompt | llm | StrOutputParser()
