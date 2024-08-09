@@ -1,3 +1,4 @@
+from langchain_teddynote.document_loaders import HWPLoader
 import streamlit as st
 from langchain_core.messages.chat import ChatMessage
 from langchain_openai import ChatOpenAI
@@ -12,7 +13,6 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_teddynote import logging
 from dotenv import load_dotenv
 import os
-from langchain_teddynote.document_loaders import HWPLoader
 
 # API KEY 정보로드
 load_dotenv()
@@ -35,12 +35,12 @@ if "messages" not in st.session_state:
     # 대화기록을 저장하기 위한 용도로 생성한다.
     st.session_state["messages"] = []
 
-if "pdf_chain" not in st.session_state:
+if "HWP_chain" not in st.session_state:
     # 아무런 파일을 업로드 하지 않을 경우
-    st.session_state["hwp_chain"] = None
+    st.session_state["HWP_chain"] = None
 
-if "pdf_retriever" not in st.session_state:
-    st.session_state["hwp_retriever"] = None
+if "HWP_retriever" not in st.session_state:
+    st.session_state["HWP_retriever"] = None
 
 # 사이드바 생성
 with st.sidebar:
@@ -48,7 +48,7 @@ with st.sidebar:
     clear_btn = st.button("대화 초기화")
 
     # 파일 업로드
-    uploaded_file = st.file_uploader("파일 업로드", type=["hwp","hwpx"])
+    uploaded_file = st.file_uploader("파일 업로드", type=["hwp"])
 
     # 모델 선택 메뉴
     selected_model = st.selectbox(
@@ -85,12 +85,13 @@ def embed_file(file):
         f.write(file_content)
 
     # 단계 1: 문서 로드(Load Documents)
-    loader = HWPLoader(file_path)
+    loader = HWPPlumberLoader(file_path)
     docs = loader.load()
 
     # 단계 2: 문서 분할(Split Documents)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
     split_documents = text_splitter.split_documents(docs)
+
     # 단계 3: 임베딩(Embedding) 생성
     embeddings = OpenAIEmbeddings()
 
@@ -112,7 +113,7 @@ def create_chain(retriever, prompt_path="prompts/pdf-rag.yaml", model_name="gpt-
 
     # 단계 7: 언어모델(LLM) 생성
     # 모델(LLM) 을 생성합니다.
-    llm = ChatOpenAI(model_name="gpt-4o", temperature=0, api_key=st.session_state.api_key)
+    llm = ChatOpenAI(model_name=model_name, temperature=0, api_key=st.session_state.api_key)
 
     # 단계 8: 체인(Chain) 생성
     chain = (
