@@ -94,7 +94,7 @@ def embed_file(file):
     split_documents = text_splitter.split_documents(docs)
 
     # 단계 3: 임베딩(Embedding) 생성
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key = st.session_state.get("openai_api_key"))
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key = st.session_state.get("api_key"))
 
     # 단계 4: DB 생성(Create DB) 및 저장
     # 벡터스토어를 생성합니다.
