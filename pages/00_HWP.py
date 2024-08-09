@@ -51,8 +51,7 @@ with st.sidebar:
     save_btn = st.button("설정 저장", key="save_btn")
 
     if save_btn:
-        settings.save_config({"api_key": api_key})
-        st.session_state.api_key = api_key
+        openai_api_key = api_key
         st.write("설정이 저장되었습니다.")
     # 파일 업로드
     uploaded_file = st.file_uploader("파일업로드", type=["hwp","hwpx"])
@@ -100,7 +99,7 @@ def embed_file(file):
     split_documents = text_splitter.split_documents(docs)
 
     # 단계 3: 임베딩(Embedding) 생성
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key = api_key)
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key = openai_api_key)
 
     # 단계 4: DB 생성(Create DB) 및 저장
     # 벡터스토어를 생성합니다.
