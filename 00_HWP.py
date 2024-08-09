@@ -16,7 +16,7 @@ import os
 from langchain_teddynote.document_loaders import HWPLoader
 
 # API KEY 정보로드
-load_dotenv()
+#load_dotenv()
 
 # 캐시 디렉토리 생성
 if not os.path.exists(".cache"):
