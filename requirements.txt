@@ -179,3 +179,4 @@ websocket-client==1.8.0 ; python_full_version == "3.11.9"
 wget==3.2 ; python_full_version == "3.11.9"
 widgetsnbextension==4.0.11 ; python_full_version == "3.11.9"
 yarl==1.9.4 ; python_full_version == "3.11.9"
+pdfplumber
