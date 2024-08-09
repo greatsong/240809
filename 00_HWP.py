@@ -46,7 +46,8 @@ if "pdf_retriever" not in st.session_state:
 # 사이드바 생성
 with st.sidebar:
     # 초기화 버튼 생성
-    clear_btn = st.button("대화 초기화")
+    clear_btn = st.button("대화 초기화!")
+    
     api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
     save_btn = st.button("설정 저장", key="save_btn")
 
