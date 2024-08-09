@@ -46,11 +46,10 @@ if "pdf_retriever" not in st.session_state:
 # 사이드바 생성
 with st.sidebar:
     # 초기화 버튼 생성
-    clear_btn = st.button("대화내용 초기화!")
-    
+    clear_btn = st.button("초기화")
 
     # 파일 업로드
-    uploaded_file = st.file_uploader("파일 업로드!", type=["hwp","hwpx"])
+    uploaded_file = st.file_uploader("파일업로드", type=["hwp","hwpx"])
 
     # 모델 선택 메뉴
     selected_model = st.selectbox(
