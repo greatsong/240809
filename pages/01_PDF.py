@@ -92,7 +92,7 @@ def embed_file(file):
     split_documents = text_splitter.split_documents(docs)
 
     # 단계 3: 임베딩(Embedding) 생성
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key = st.session_state.api_key)
 
     # 단계 4: DB 생성(Create DB) 및 저장
     # 벡터스토어를 생성합니다.
@@ -112,8 +112,8 @@ def create_chain(retriever, prompt_path="prompts/pdf-rag.yaml", model_name="gpt-
 
     # 단계 7: 언어모델(LLM) 생성
     # 모델(LLM) 을 생성합니다.
-    llm = ChatOpenAI(model_name=model_name, temperature=0)
-
+    llm = ChatOpenAI(model_name=model_name, temperature=0, openai_api_key = st.session_state.api_key)
+    
     # 단계 8: 체인(Chain) 생성
     chain = (
         {"context": retriever, "question": RunnablePassthrough()}
