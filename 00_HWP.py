@@ -85,7 +85,7 @@ def embed_file(file):
         f.write(file_content)
 
     # 단계 1: 문서 로드(Load Documents)
-    loader = HWPPlumberLoader(file_path)
+    loader = HWPLoader(file_path)
     docs = loader.load()
 
     # 단계 2: 문서 분할(Split Documents)
