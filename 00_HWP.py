@@ -16,7 +16,7 @@ export OPENAI_API_KEY=st.session_state.api_key
 from langchain_teddynote.document_loaders import HWPLoader
 
 # API KEY 정보로드
-#load_dotenv()
+load_dotenv()
 
 # 캐시 디렉토리 생성
 if not os.path.exists(".cache"):
@@ -93,7 +93,7 @@ def embed_file(file):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
     split_documents = text_splitter.split_documents(docs)
     # 단계 3: 임베딩(Embedding) 생성
-    embeddings = OpenAIEmbeddings(openai_api_key = st.session_state.api_key)
+    embeddings = OpenAIEmbeddings()
 
     # 단계 4: DB 생성(Create DB) 및 저장
     # 벡터스토어를 생성합니다.
