@@ -75,8 +75,6 @@ def print_messages():
 def add_message(role, message):
     st.session_state["messages"].append(ChatMessage(role=role, content=message))
 
-OPENAI_API_KEY = st.session_state.api_key
-openai_api_key = st.session_state.api_key
 
 # 파일을 캐시 저장(시간이 오래 걸리는 작업을 처리할 예정)
 @st.cache_resource(show_spinner="업로드한 파일을 처리 중입니다...")
@@ -95,7 +93,7 @@ def embed_file(file):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
     split_documents = text_splitter.split_documents(docs)
     # 단계 3: 임베딩(Embedding) 생성
-    embeddings = OpenAIEmbeddings(api_key=st.session_state.api_key)
+    embeddings = OpenAIEmbeddings(openai_api_key = st.session_state.api_key)
 
     # 단계 4: DB 생성(Create DB) 및 저장
     # 벡터스토어를 생성합니다.
