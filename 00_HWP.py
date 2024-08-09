@@ -48,13 +48,7 @@ with st.sidebar:
     # 초기화 버튼 생성
     clear_btn = st.button("대화내용 초기화!")
     
-    api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
-    save_btn = st.button("설정 저장", key="save_btn")
 
-    if save_btn:
-        settings.save_config({"api_key": api_key})
-        st.session_state.api_key = api_key
-        st.write("설정이 저장되었습니다.")
     # 파일 업로드
     uploaded_file = st.file_uploader("파일 업로드!", type=["hwp","hwpx"])
 
@@ -164,7 +158,14 @@ if update_btn:
 
 # 이전 대화 기록 출력
 print_messages()
+api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
+save_btn = st.button("설정 저장", key="save_btn")
 
+if save_btn:
+    settings.save_config({"api_key": api_key})
+    st.session_state.api_key = api_key
+    st.write("설정이 저장되었습니다.")
+    
 # 사용자의 입력
 user_input = st.chat_input("궁금한 내용을 물어보세요!")
 
