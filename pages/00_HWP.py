@@ -119,7 +119,7 @@ def create_chain(retriever, prompt_path="prompts/pdf-rag.yaml", model_name="gpt-
 
     # 단계 7: 언어모델(LLM) 생성
     # 모델(LLM) 을 생성합니다.
-    llm = ChatOpenAI(model_name=model_name, temperature=0, openai_api_key = openai_api_key)
+    llm = ChatOpenAI(model_name=model_name, temperature=0, openai_api_key = api_key)
 
     # 단계 8: 체인(Chain) 생성
     chain = (
