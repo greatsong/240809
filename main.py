@@ -8,7 +8,7 @@ import glob
 import settings
 
 # API KEY 정보로드
-load_dotenv()
+#load_dotenv()
 
 # python -m streamlit run main.py
 st.title("📝석리송 전용 GPT")
