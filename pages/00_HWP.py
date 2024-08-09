@@ -47,12 +47,14 @@ if "pdf_retriever" not in st.session_state:
 with st.sidebar:
     # 초기화 버튼 생성
     clear_btn = st.button("초기화")
+    '''
     api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
     save_btn = st.button("설정 저장", key="save_btn")
 
     if save_btn:
         openai_api_key = api_key
         st.write("설정이 저장되었습니다.")
+    '''
     # 파일 업로드
     uploaded_file = st.file_uploader("파일업로드", type=["hwp","hwpx"])
 
