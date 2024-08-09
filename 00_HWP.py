@@ -12,7 +12,6 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_teddynote import logging
 from dotenv import load_dotenv
 import os
-export OPENAI_API_KEY=st.session_state.api_key
 from langchain_teddynote.document_loaders import HWPLoader
 
 # API KEY 정보로드
