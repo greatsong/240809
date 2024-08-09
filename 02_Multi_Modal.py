@@ -83,6 +83,7 @@ def generate_answer(image_filepath, system_prompt, user_prompt, model_name="gpt-
     llm = ChatOpenAI(
         temperature=0,
         model_name=model_name,  # 모델명
+        api_key=st.session_state.api_key
     )
 
     # 멀티모달 객체 생성
