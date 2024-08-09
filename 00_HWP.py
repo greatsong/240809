@@ -56,7 +56,7 @@ with st.sidebar:
         st.session_state.api_key = api_key
         st.write("설정이 저장되었습니다.")
     # 파일 업로드
-    uploaded_file = st.file_uploader("파일 업로드", type=["hwp","hwpx"])
+    uploaded_file = st.file_uploader("파일 업로드!", type=["hwp","hwpx"])
 
     # 모델 선택 메뉴
     selected_model = st.selectbox(
