@@ -5,12 +5,26 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_teddynote.prompts import load_prompt
 from dotenv import load_dotenv
 import glob
+import settings
 
 # API KEY 정보로드
 load_dotenv()
 
 # python -m streamlit run main.py
-st.title("나만의 챗GPT💬")
+st.title("📝석리송 전용 GPT")
+
+config = settings.load_config()
+if "api_key" in config:
+    st.session_state.api_key = config["api_key"]
+main_text = st.empty()
+
+api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
+save_btn = st.button("설정 저장", key="save_btn")
+
+if save_btn:
+    settings.save_config({"api_key": api_key})
+    st.session_state.api_key = api_key
+    st.write("설정이 저장되었습니다.")
 
 
 # 처음 1번만 실행하기 위한 코드
