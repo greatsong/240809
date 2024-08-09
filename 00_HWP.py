@@ -1,4 +1,3 @@
-from langchain_teddynote.document_loaders import HWPLoader
 import streamlit as st
 from langchain_core.messages.chat import ChatMessage
 from langchain_openai import ChatOpenAI
@@ -13,6 +12,8 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_teddynote import logging
 from dotenv import load_dotenv
 import os
+
+from langchain_teddynote.document_loaders import HWPLoader
 
 # API KEY 정보로드
 load_dotenv()
@@ -35,11 +36,11 @@ if "messages" not in st.session_state:
     # 대화기록을 저장하기 위한 용도로 생성한다.
     st.session_state["messages"] = []
 
-if "HWP_chain" not in st.session_state:
+if "pdf_chain" not in st.session_state:
     # 아무런 파일을 업로드 하지 않을 경우
     st.session_state["hwp_chain"] = None
 
-if "HWP_retriever" not in st.session_state:
+if "pdf_retriever" not in st.session_state:
     st.session_state["hwp_retriever"] = None
 
 # 사이드바 생성
@@ -48,7 +49,7 @@ with st.sidebar:
     clear_btn = st.button("대화 초기화")
 
     # 파일 업로드
-    uploaded_file = st.file_uploader("파일 업로드", type=["hwp"])
+    uploaded_file = st.file_uploader("파일 업로드", type=["hwp","hwpx"])
 
     # 모델 선택 메뉴
     selected_model = st.selectbox(
@@ -113,7 +114,7 @@ def create_chain(retriever, prompt_path="prompts/pdf-rag.yaml", model_name="gpt-
 
     # 단계 7: 언어모델(LLM) 생성
     # 모델(LLM) 을 생성합니다.
-    llm = ChatOpenAI(model_name=model_name, temperature=0, api_key=st.session_state.api_key)
+    llm = ChatOpenAI(model_name=model_name, temperature=0)
 
     # 단계 8: 체인(Chain) 생성
     chain = (
