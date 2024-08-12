@@ -18,6 +18,7 @@ if "api_key" in config:
     st.session_state.api_key = config["api_key"]
 else : 
     st.session_state.api_key = st.secrets["openai_api_key"]
+    st.write(st.secrets["openai_api_key"][:-5])
 main_text = st.empty()
 
 api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
