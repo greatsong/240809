@@ -22,13 +22,13 @@ else :
     st.write(f'API키 : {st.secrets["openai_api_key"][-5:]}')
 main_text = st.empty()
 
-api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
-save_btn = st.button("설정 저장", key="save_btn")
+#api_key = st.text_input("🔑 새로운 OPENAI API Key", type="password")
+#save_btn = st.button("설정 저장", key="save_btn")
 
-if save_btn:
-    settings.save_config({"api_key": api_key})
-    st.session_state.api_key = api_key
-    st.write("설정이 저장되었습니다.")
+#if save_btn:
+#    settings.save_config({"api_key": api_key})
+#    st.session_state.api_key = api_key
+#    st.write("설정이 저장되었습니다.")
 
 
 # 처음 1번만 실행하기 위한 코드
